@@ -1,7 +1,4 @@
-/* Base page */
-:root {
-  color-scheme: dark;
-}
+:root { color-scheme: dark; }
 
 html, body {
   height: 100%;
@@ -9,42 +6,38 @@ html, body {
 }
 
 body {
-  background-color: #000000; /* black background */
-  color: #ffffff;            /* white text */
+  background-color: #000000;
+  color: #ffffff;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-/* Header sits at the top, inside the top 20% of the viewport */
+/* Header: fixed at top, occupies top 20% of viewport */
 .site-header {
-  position: fixed;     /* pin to top */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 20vh;        /* top 20% of viewport height */
+  height: 20vh;
   display: flex;
-  align-items: center; /* vertically center the title within the header */
-  justify-content: center; /* horizontally center the title */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   z-index: 1000;
-  /* background transparent so the black page shows through */
 }
 
-.site-header h1 {
-  margin: 0;
-}
+.site-header h1 { margin: 0; }
 
-/* Main occupies the remaining 80% and starts below the header */
+/* Main area fills remaining 80% and centers the form */
 .site-main {
-  /* push main content below the 20vh header */
-  padding-top: 20vh;
+  padding-top: 20vh; /* offset below header */
   min-height: 80vh;
   display: flex;
-  align-items: center;     /* vertical center */
-  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical centering */
+  justify-content: center; /* horizontal centering */
   box-sizing: border-box;
 }
 
-/* Blue bordered login box, centered */
+/* Blue bordered login box */
 .login-box {
   width: 100%;
   max-width: 380px;
@@ -61,7 +54,6 @@ body {
   font-size: 1.25rem;
 }
 
-/* Form fields */
 .field {
   display: flex;
   flex-direction: column;
@@ -69,9 +61,7 @@ body {
   margin-bottom: 14px;
 }
 
-label {
-  font-size: 0.95rem;
-}
+label { font-size: 0.95rem; }
 
 input[type="text"],
 input[type="password"] {
@@ -100,7 +90,7 @@ button[type="submit"] {
   padding: 10px 12px;
   border: none;
   border-radius: 8px;
-  background: #1e90ff; /* blue button to match border */
+  background: #1e90ff;
   color: #000000;
   font-weight: 700;
   cursor: pointer;
