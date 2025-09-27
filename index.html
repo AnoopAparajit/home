@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Header stays at the very top, within the top 20% of the page -->
     <header class="site-header" role="banner">
       <h1>Aparajit Home</h1>
     </header>
 
-    <!-- Main area occupies the remaining 80% and centers the login box -->
     <main class="site-main" role="main">
-      <form class="login-box" action="#" method="post" aria-labelledby="login-title">
+      <form id="login-form" class="login-box" aria-labelledby="login-title">
         <h2 id="login-title">Login</h2>
 
         <div class="field">
@@ -30,5 +28,7 @@
         <button type="submit">Sign in</button>
       </form>
     </main>
+
+    <script src="app.js"></script>
   </body>
 </html>
