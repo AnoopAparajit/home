@@ -7,12 +7,26 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="top-fixed">
+    <header class="top-fixed" role="banner">
       <h1>Aparajit Home</h1>
     </header>
 
-    <main class="content">
-      <h1>Aparajit Home</h1>
+    <main class="content" role="main">
+      <form class="login" action="#" method="post" aria-labelledby="login-title">
+        <h2 id="login-title">Login</h2>
+
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+
+        <button type="submit">Sign in</button>
+      </form>
     </main>
   </body>
 </html>
