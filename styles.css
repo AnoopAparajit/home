@@ -1,4 +1,8 @@
 /* Base page */
+:root {
+  color-scheme: dark;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -10,39 +14,49 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-/* Fixed top header */
-.top-fixed {
-  position: fixed;
+/* Header sits at the top, inside the top 20% of the viewport */
+.site-header {
+  position: fixed;     /* pin to top */
   top: 0;
   left: 0;
   right: 0;
-  text-align: center;
-  padding: 16px 0;
-  z-index: 1000;
-}
-
-/* Ensure content starts below the fixed header */
-.content {
-  padding-top: 80px; /* adjust to match header height */
-  min-height: calc(100% - 80px);
+  height: 20vh;        /* top 20% of viewport height */
   display: flex;
-  align-items: flex-start;   /* start just below header */
-  justify-content: center;   /* center horizontally */
+  align-items: center; /* vertically center the title within the header */
+  justify-content: center; /* horizontally center the title */
+  text-align: center;
+  z-index: 1000;
+  /* background transparent so the black page shows through */
 }
 
-/* Login form styles */
-.login {
-  width: 100%;
-  max-width: 360px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(2px);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  padding: 24px;
+.site-header h1 {
+  margin: 0;
+}
+
+/* Main occupies the remaining 80% and starts below the header */
+.site-main {
+  /* push main content below the 20vh header */
+  padding-top: 20vh;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;     /* vertical center */
+  justify-content: center; /* horizontal center */
   box-sizing: border-box;
 }
 
-.login h2 {
+/* Blue bordered login box, centered */
+.login-box {
+  width: 100%;
+  max-width: 380px;
+  padding: 24px;
+  border: 2px solid #1e90ff; /* blue border */
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px);
+  box-sizing: border-box;
+}
+
+.login-box h2 {
   margin: 0 0 16px 0;
   font-size: 1.25rem;
 }
@@ -61,7 +75,6 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  appearance: none;
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
@@ -69,6 +82,7 @@ input[type="password"] {
   background: rgba(255,255,255,0.08);
   color: #ffffff;
   outline: none;
+  box-sizing: border-box;
 }
 
 input[type="text"]::placeholder,
@@ -81,18 +95,17 @@ input[type="password"]:focus {
   border-color: #ffffff;
 }
 
-/* Submit button */
 button[type="submit"] {
   width: 100%;
   padding: 10px 12px;
   border: none;
   border-radius: 8px;
-  background: #ffffff;
+  background: #1e90ff; /* blue button to match border */
   color: #000000;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
 button[type="submit"]:hover {
-  background: #e6e6e6;
+  background: #3aa0ff;
 }
