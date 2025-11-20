@@ -1,39 +1,88 @@
-// Utility: CSV-escape a cell
-function toCsvCell(value) {
-  const v = String(value ?? "");
-  const needsQuotes = /[",\n]/.test(v);
-  const escaped = v.replace(/"/g, '""');
-  return needsQuotes ? `"${escaped}"` : escaped;
-}
+document.addEventListener('DOMContentLoaded', () => {
+  // Clock and Date
+  function updateTime() {
+    const now = new Date();
+    const timeElement = document.getElementById('clock');
+    const dateElement = document.getElementById('date');
+    const greetingElement = document.getElementById('greeting');
 
-// Build a CSV string with one header row and one data row
-function buildCsv(headers, row) {
-  const headerLine = headers.map(toCsvCell).join(",");
-  const rowLine = row.map(toCsvCell).join(",");
-  return headerLine + "\n" + rowLine + "\n";
-}
+    // Time
+    timeElement.textContent = now.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
 
-// Handle form submit: build CSV and trigger client-side download
-document.getElementById("login-form").addEventListener("submit", (e) => {
-  e.preventDefault();
+    // Date
+    dateElement.textContent = now.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
 
-  const username = (document.getElementById("username").value || "").trim();
-  const password = (document.getElementById("password").value || "").trim();
+    // Dynamic Greeting
+    const hour = now.getHours();
+    let greeting = 'Welcome Home';
+    if (hour < 12) greeting = 'Good Morning';
+    else if (hour < 18) greeting = 'Good Afternoon';
+    else greeting = 'Good Evening';
 
-  // NOTE: This is a demo for static sites; do not store real passwords this way.
-  const headers = ["timestamp_iso", "username", "password"];
-  const row = [new Date().toISOString(), username, password];
-  const csv = buildCsv(headers, row);
+    if (greetingElement.textContent !== greeting) {
+      greetingElement.textContent = greeting;
+    }
+  }
 
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const filename = `login_${new Date().toISOString().replace(/[:.]/g, "-")}.csv`;
+  setInterval(updateTime, 1000);
+  updateTime();
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  // Quick Notes (LocalStorage)
+  const notesArea = document.getElementById('quick-notes');
+  const saveBtn = document.getElementById('save-notes');
+  const savedNotes = localStorage.getItem('pi_dashboard_notes');
+
+  if (savedNotes) {
+    notesArea.value = savedNotes;
+  }
+
+  function saveNotes() {
+    localStorage.setItem('pi_dashboard_notes', notesArea.value);
+
+    // Visual feedback
+    const originalText = saveBtn.textContent;
+    saveBtn.textContent = '✅';
+    setTimeout(() => {
+      saveBtn.textContent = originalText;
+    }, 1000);
+  }
+
+  saveBtn.addEventListener('click', saveNotes);
+
+  // Auto-save on typing (debounced)
+  let timeoutId;
+  notesArea.addEventListener('input', () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      localStorage.setItem('pi_dashboard_notes', notesArea.value);
+    }, 1000);
+  });
+
+  // Mock System Status Updates (Randomize slightly for "liveness")
+  function updateSystemStatus() {
+    const fills = document.querySelectorAll('.status-fill');
+    const values = document.querySelectorAll('.status-value');
+
+    fills.forEach((fill, index) => {
+      // Random fluctuation around a base value
+      const base = [15, 42, 38][index];
+      const fluctuation = Math.floor(Math.random() * 10) - 5;
+      const newValue = Math.max(0, Math.min(100, base + fluctuation));
+
+      fill.style.width = `${newValue}%`;
+      values[index].textContent = `${newValue}${index === 2 ? '°C' : '%'}`;
+    });
+  }
+
+  setInterval(updateSystemStatus, 3000);
 });

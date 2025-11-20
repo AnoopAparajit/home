@@ -2,32 +2,105 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Aparajit Home</title>
+    <title>Pi Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Personal Raspberry Pi Dashboard" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header class="site-header" role="banner">
-      <h1>Aparajit Home</h1>
-    </header>
-
-    <main class="site-main" role="main">
-      <form id="login-form" class="login-box" aria-labelledby="login-title">
-        <h2 id="login-title">Login</h2>
-
-        <div class="field">
-          <label for="username">Username</label>
-          <input id="username" name="username" type="text" autocomplete="username" required />
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <div class="greeting-section">
+          <h1 id="greeting">Welcome Home</h1>
+          <p id="clock" class="clock">00:00:00</p>
+          <p id="date" class="date">Loading date...</p>
         </div>
-
-        <div class="field">
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <div class="system-status">
+            <div class="status-item">
+                <span class="status-label">CPU</span>
+                <div class="status-bar"><div class="status-fill" style="width: 15%"></div></div>
+                <span class="status-value">15%</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">RAM</span>
+                <div class="status-bar"><div class="status-fill" style="width: 42%"></div></div>
+                <span class="status-value">42%</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">TEMP</span>
+                <div class="status-bar"><div class="status-fill" style="width: 38%"></div></div>
+                <span class="status-value">38°C</span>
+            </div>
         </div>
+      </header>
 
-        <button type="submit">Sign in</button>
-      </form>
-    </main>
+      <main class="dashboard-grid">
+        <!-- Service Cards -->
+        <a href="#" class="card service-card">
+          <div class="card-icon">🔒</div>
+          <div class="card-content">
+            <h3>Pi-hole</h3>
+            <p>Network-wide Ad Blocking</p>
+          </div>
+        </a>
+
+        <a href="#" class="card service-card">
+          <div class="card-icon">🏠</div>
+          <div class="card-content">
+            <h3>Home Assistant</h3>
+            <p>Home Automation</p>
+          </div>
+        </a>
+
+        <a href="#" class="card service-card">
+          <div class="card-icon">🎬</div>
+          <div class="card-content">
+            <h3>Plex</h3>
+            <p>Media Server</p>
+          </div>
+        </a>
+
+        <a href="#" class="card service-card">
+          <div class="card-icon">📂</div>
+          <div class="card-content">
+            <h3>File Browser</h3>
+            <p>Web File Manager</p>
+          </div>
+        </a>
+
+        <a href="#" class="card service-card">
+          <div class="card-icon">🐳</div>
+          <div class="card-content">
+            <h3>Portainer</h3>
+            <p>Docker Management</p>
+          </div>
+        </a>
+
+        <a href="#" class="card service-card">
+          <div class="card-icon">📊</div>
+          <div class="card-content">
+            <h3>Grafana</h3>
+            <p>Metrics Dashboard</p>
+          </div>
+        </a>
+
+        <!-- Quick Notes Section -->
+        <div class="card notes-card">
+            <div class="card-header">
+                <h3>Quick Notes</h3>
+                <button id="save-notes" class="icon-btn" title="Saved automatically">💾</button>
+            </div>
+            <textarea id="quick-notes" placeholder="Jot down something..."></textarea>
+        </div>
+      </main>
+
+      <footer class="dashboard-footer">
+        <p>Hosted on Raspberry Pi • <span id="uptime">Uptime: 12 days</span></p>
+      </footer>
+    </div>
 
     <script src="app.js"></script>
   </body>
